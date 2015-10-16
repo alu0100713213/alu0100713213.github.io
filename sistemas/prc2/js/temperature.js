@@ -1,14 +1,44 @@
 (function(exports) {
   "use strict";
 
-  function Medida(){
-    this.data = null;
+  function Medida(data_)
+  {
+    this.data = data_;
   };
 
-  function Temperatura(tempValue){
-    this.tempValue = tempValue;
+  function Temperatura(tempValue)
+  {
+    Medida.call(this, tempValue);
   };
 
+  function Celsius(valor)
+  {
+    Temperatura.call(this, valor);
+    this.toFahrenheit = function()
+    {
+      ext1 = (this.valor * 9/5) + 32;
+      return ext1.toFixed(1) + " " + "Fahrenheit";
+    }
+  }
+  exports.Temperatura = Temperatura;
+  exports.Celsius = Celsius;
+
+  exports.convertir = function(tipo)
+  {
+    var valor     = document.getElementById('temp').value;
+    var resultado  = document.getElementById('divsalida');
+
+      switch (tipo)
+      {
+        case 'C':
+          var aux = new Celsius(valor);
+          divsalida.innerHTML = aux.toFahrenheit().toFixed(1) + " Farenheit";
+          break;
+      }
+    }
+
+})(this);
+  /**
   Temperatura.prototype = new Medida();
   Temperatura.prototype.constructor = Temperatura;
   Temperatura.prototype.convertir = function(converter){
@@ -52,3 +82,4 @@
     divsalida.innerHTML = Temp.convertir(converter);
   };
 })(this);
+*/
